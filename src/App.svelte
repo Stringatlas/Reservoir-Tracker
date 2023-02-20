@@ -15,18 +15,19 @@
 		
 	}
 	import Highcharts from "./highcharts.svelte";
+	import {parse, example} from "./parser"
 </script>
 
 <main>
-	<Highcharts />
+	<Highcharts data={example()}/>
 	<div class="title-bar">
 		<h1>View Reservoir Levels</h1>
 	</div>
 
 
 	<div id="charts">
-		<Chart name="San Luis Water Levels (Acre Feet)" id="San Luis" type="Line" />
-		<Chart name="Lake Mead" id="chart2" type="Line" />
+		<Chart name="San Luis Water Levels" id="San Luis" type="Line" />
+		<Chart name="" id="chart2" type="Line" />
 		<Chart name="San Luis" id="chart3" type="Line" />
 		<Chart name="San Luis" id="chart4" type="Line" />
 		<Chart name="San Luis" id="chart5" type="Line" />

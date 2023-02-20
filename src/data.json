@@ -1,8 +1,44 @@
 {
     "San Luis":
-        {
-            "LUS": ["San Luis (State)", ["D", "M"]],
-            "SLF": ["San Luis (Federal)", ["D", "M"]],
-            "SNL": ["San Luis", ["D", "M"]]
-        }
+    {
+        "LUS": "San Luis Reservoir (State)",
+        "SLF": "San Luis Reservoir (Federal)",
+        "SNL": "San Luis Reservoir"
+    },
+
+    "Stevens Creek": 
+    {
+        "SEC": "Stevens Creek Reservoir"
+    },
+
+    "Lexington": 
+    {
+        "LNG": "Lexington Reservoir"
+    },
+
+    "Oroville": 
+    {
+        "ORO": "Lake Oroville"
+    },
+
+    "Berryessa": 
+    {
+        "BER": "Lake Berryessa"
+    },
+
+    "Coyote":
+    {
+        "COY": "Coyote (Lake Mendocino)"
+    },
+
+    "Folsom":
+    {
+        "FOL": "Folsom Lake"
+    },
+
+    "Melones": 
+    {
+        "NML": "New Melones Reservoir"
+    }
+
 }

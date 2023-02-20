@@ -1,18 +1,13 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
     export let name: string;
-
-    let iframeLookup = new Map();
-    iframeLookup.set("San Luis", "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=San%20Luis%20Reservoir+(San%20Luis%20Reservoir)&amp;t=p&amp;z=6&amp;ie=UTF8&amp;iwloc=B&amp;output=embed");
-
-    let iframeSrc = iframeLookup.get(name);
     
     function closeTestModal() {
-        $isOpen = false;
+        $isOpen = "None";
     }
 
     function openTestModal() {
-        $isOpen = true;
+        $isOpen = name;
     }
     
 </script>
@@ -20,7 +15,7 @@
 <script lang="ts" context="module">
     import { writable } from 'svelte/store';
 
-    export let isOpen = writable(false);
+    export let isOpen = writable("None");
     
 </script>
 
@@ -83,13 +78,21 @@
     }
 </style>
 
-{#if $isOpen}
+{#if $isOpen === name}
     <div role="dialog" class="modal" transition:fade>
         <div class="contents">
-            <div style="width: 100%">
-                <iframe title="Map" width="100%" height="auto" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
-                    src={iframeSrc}>
-                </iframe>
+            <p>Map may take a while to load</p>
+            <div style="width: 80vw">
+                <div style="width: 100%">
+                    {#if name == "San Luis"}
+                        <iframe title="Map" width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=San%20Luis%20Reservoir+(San%20Luis%20Reservoir)&amp;t=p&amp;z=6&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                            <a href="https://www.maps.ie/distance-area-calculator.html">measure area map</a>
+                        </iframe>
+                    {:else}
+                        <p>No map found</p>
+                    {/if}
+                </div>
             </div>
             <div class="actions">
                 <button on:click="{closeTestModal}">Exit</button>
@@ -98,10 +101,10 @@
     </div>
 {/if}
 
-{#if $isOpen}
+{#if $isOpen === name}
 <div
     class="backdrop"
-
+    style="z-index: 1"
     on:keyup={e => {
         if (e.key === 'Escape') {
             closeTestModal()

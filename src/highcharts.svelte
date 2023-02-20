@@ -2,150 +2,33 @@
     import Highcharts from 'highcharts';
 
     let chart;
+    export let data;
 
-    // Highcharts.addEvent(Highcharts.Point, 'click', function () {
-    //     if (this.series.options.className.indexOf('popup-on-click') !== -1) {
-    //         const chart = this.series.chart;
-    //         const date = Highcharts.dateFormat('%A, %b %e, %Y', this.x);
-    //         const text = `<b>${date}</b><br/>${this.y} ${this.series.name}`;
-
-    //         const anchorX = this.plotX + this.series.xAxis.pos;
-    //         const anchorY = this.plotY + this.series.yAxis.pos;
-    //         const align = anchorX < chart.chartWidth - 200 ? 'left' : 'right';
-    //         const x = align === 'left' ? anchorX + 10 : anchorX - 10;
-    //         const y = anchorY - 30;
-    //         if (!chart.sticky) {
-    //             chart.sticky = chart.renderer
-    //                 .label(text, x, y, 'callout',  anchorX, anchorY)
-    //                 .attr({
-    //                     align,
-    //                     fill: 'rgba(0, 0, 0, 0.75)',
-    //                     padding: 10,
-    //                     zIndex: 7 // Above series, below tooltip
-    //                 })
-    //                 .css({
-    //                     color: 'white'
-    //                 })
-    //                 .on('click', function () {
-    //                     chart.sticky = chart.sticky.destroy();
-    //                 })
-    //                 .add();
-    //         } else {
-    //             chart.sticky
-    //                 .attr({ align, text })
-    //                 .animate({ anchorX, anchorY, x, y }, { duration: 250 });
-    //         }
-    //     }
-    // });
-
-
-    // Highcharts.chart('container', {
-
-    //     chart: {
-    //         scrollablePlotArea: {
-    //             minWidth: 700
-    //         }
-    //     },
-
-    //     data: {
-    //         csvURL: 'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/analytics.csv',
-    //         beforeParse: function (csv) {
-    //             return csv.replace(/\n\n/g, '\n');
-    //         }
-    //     },
-
-    //     title: {
-    //         text: 'Daily sessions at www.highcharts.com',
-    //         align: 'left'
-    //     },
-
-    //     subtitle: {
-    //         text: 'Source: Google Analytics',
-    //         align: 'left'
-    //     },
-
-    //     xAxis: {
-    //         tickInterval: 7 * 24 * 3600 * 1000, // one week
-    //         tickWidth: 0,
-    //         gridLineWidth: 1,
-    //         labels: {
-    //             align: 'left',
-    //             x: 3,
-    //             y: -3
-    //         }
-    //     },
-
-    //     yAxis: [{ // left y axis
-    //         title: {
-    //             text: null
-    //         },
-    //         labels: {
-    //             align: 'left',
-    //             x: 3,
-    //             y: 16,
-    //             format: '{value:.,0f}'
-    //         },
-    //         showFirstLabel: false
-    //     }, { // right y axis
-    //         linkedTo: 0,
-    //         gridLineWidth: 0,
-    //         opposite: true,
-    //         title: {
-    //             text: null
-    //         },
-    //         labels: {
-    //             align: 'right',
-    //             x: -3,
-    //             y: 16,
-    //             format: '{value:.,0f}'
-    //         },
-    //         showFirstLabel: false
-    //     }],
-
-    //     legend: {
-    //         align: 'left',
-    //         verticalAlign: 'top',
-    //         borderWidth: 0
-    //     },
-
-    //     tooltip: {
-    //         shared: true,
-    //         crosshairs: true
-    //     },
-
-    //     plotOptions: {
-    //         series: {
-    //             cursor: 'pointer',
-    //             className: 'popup-on-click',
-    //             marker: {
-    //                 lineWidth: 1
-    //             }
-    //         }
-    //     },
-
-    //     series: [{
-    //         name: 'All sessions',
-    //         lineWidth: 4,
-    //         marker: {
-    //             radius: 4
-    //         }
-    //     }, {
-    //         name: 'New users'
-    //     }]
-    // });
     import { onMount } from 'svelte';
 
+    console.log(data)
     onMount(() => {
         const options = {
         chart: {
             type: 'line'
         },
-        title: {
-            text: 'My Chart'
+        xAxis: {
+            type: 'datetime',
+            tickInterval: 24 * 3600 * 1000, // One day in milliseconds
+            labels: {
+                format: '{value:%Y-%m-%d}' // Format the date label
+            },
+            title: "Month"
         },
-        series: [{
-            data: [1, 2, 3, 4, 5]
-        }]
+        title: {
+            text: 'Water levels (Acre Feet)'
+        },
+        series: [
+            {
+                name: "Mot",
+                data: data,
+            },
+        ]
     };
 
         Highcharts.chart(chart, options)
@@ -153,52 +36,13 @@
 
 </script>
 
-<figure class="highcharts-figure">
+<div id="chart-parent">
     <div id="myChart" bind:this={chart}></div>
-</figure>
+</div>
 
 <style>
-    .highcharts-figure,
-    .highcharts-data-table table {
-        min-width: 360px;
-        max-width: 800px;
-        margin: 1em auto;
-    }
-
-    .highcharts-data-table table {
-        font-family: Verdana, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #ebebeb;
-        margin: 10px auto;
-        text-align: center;
+    #chart-parent {
         width: 100%;
-        max-width: 500px;
-    }
-
-    .highcharts-data-table caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-    }
-
-    .highcharts-data-table th {
-        font-weight: 600;
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table td,
-    .highcharts-data-table th,
-    .highcharts-data-table caption {
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table thead tr,
-    .highcharts-data-table tr:nth-child(even) {
-        background: #f8f8f8;
-    }
-
-    .highcharts-data-table tr:hover {
-        background: #f1f7ff;
     }
 
 </style>

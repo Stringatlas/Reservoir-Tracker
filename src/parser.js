@@ -1,5 +1,5 @@
-<script lang="ts">
-    let sample = [{"stationId":"LUS","durCode":"M","SENSOR_NUM":15,"sensorType":"STORAGE","date":"1968-10-1 00:00","obsDate":"1968-10-29 00:00","value":322376,"dataFlag":" ","units":"AF"},
+
+let sample = [{"stationId":"LUS","durCode":"M","SENSOR_NUM":15,"sensorType":"STORAGE","date":"1968-10-1 00:00","obsDate":"1968-10-29 00:00","value":322376,"dataFlag":" ","units":"AF"},
 {"stationId":"LUS","durCode":"M","SENSOR_NUM":15,"sensorType":"STORAGE","date":"1968-11-1 00:00","obsDate":"1968-11-28 00:00","value":408604,"dataFlag":" ","units":"AF"},
 {"stationId":"LUS","durCode":"M","SENSOR_NUM":15,"sensorType":"STORAGE","date":"1968-12-1 00:00","obsDate":"1968-12-29 00:00","value":537083,"dataFlag":" ","units":"AF"},
 {"stationId":"LUS","durCode":"M","SENSOR_NUM":15,"sensorType":"STORAGE","date":"1969-1-1 00:00","obsDate":"1969-1-31 00:00","value":710857,"dataFlag":" ","units":"AF"},
@@ -653,17 +653,25 @@
 {"stationId":"LUS","durCode":"M","SENSOR_NUM":15,"sensorType":"STORAGE","date":"2023-1-1 00:00","obsDate":"2023-1-1 00:00","value":780799,"dataFlag":" ","units":"AF"},
 {"stationId":"LUS","durCode":"M","SENSOR_NUM":15,"sensorType":"STORAGE","date":"2023-2-1 00:00","obsDate":"2023-2-1 00:00","value":-9999,"dataFlag":" ","units":"AF"}]
 
-    function parse(data: Array<any>) {
-        const result = []
+export function parse(data) {
+    const values = []
+    const dates = []
+    
+    const result = []
+    for (let i = 0; i < data.length; i++) {
+        const obj = data[i]
 
-        for (let i = 0; i < data.length; i++) {
-            const obj = data[i]
+        if (obj.value == -9999)
+            continue
 
-            if (obj.value == -9999)
-                break
-
-            let date = obj.date.substr().slice(0, -6);
-        }
+        let date = obj.date.substr().slice(0, -6);
+        result.push([date, obj.value]);
     }
 
-</script>
+    return result;
+}
+
+export function example() {
+    return parse(sample);
+}
+
