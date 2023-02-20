@@ -71,15 +71,34 @@
         let start = ordering[selectedOptionTimePeriod]();
         let selectedDM = selectedOptionDM == 0 ? "D" : "M";
         
-        let url = `https://cors-anywhere.herokuapp.com/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
-        let jsonData;
-        const response = await fetch(url, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-        });
+        try {
+            let url = `https://cors-anywhere.herokuapp.com/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
+        
+            let jsonData;
+            const response = await fetch(url, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+            });
 
-        jsonData = await response.json();
-        return jsonData
+            jsonData = await response.json();
+            return jsonData
+
+        } catch (error) {
+            console.log(error)
+            console.log("trying htmldriven cors proxy")
+            
+            let url = `https://cors-proxy.htmldriven.com/?url=/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
+        
+            let jsonData;
+            const response = await fetch(url, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+            });
+
+            jsonData = await response.json();
+            return jsonData
+        }
+        
     }
 
     async function generateGraph() {
