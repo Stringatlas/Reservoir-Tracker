@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Chart from "./chart.svelte";
 
-	let url = "https://google.com";
+	let url = "https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=MEA&SensorNums=15&dur_code=M&Start=2021-02-19&End=2023-02-19";
 	
 	fetch(url, {
 		method: 'GET', // *GET, POST, PUT, DELETE, etc.
-   		mode: 'no-cors', // no-cors, *cors, same-origin
+   		mode: 'cors', // no-cors, *cors, same-origin
 	})
 	.then((response) => {
 		if (!response.ok) {
