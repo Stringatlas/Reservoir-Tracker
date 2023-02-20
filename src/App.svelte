@@ -1,21 +1,13 @@
 <script lang="ts">
 	import Chart from "./chart.svelte";
+	import Highcharts from "./highcharts.svelte";
+	import {parse, example} from "./parser"
+	import stationData from "./data.json";
 
-	
 	let start = "2021-2-19";
 	let end = "2023-2-19";
 	let period: "M" | "D" = 'D';
-	
-	let data = {
-		"MEA": {
-			stationID: "MEA",
-			sensorNum: "15",
-			period: ["M", "D"]
-		},
-		
-	}
-	import Highcharts from "./highcharts.svelte";
-	import {parse, example} from "./parser"
+
 </script>
 
 <main>
@@ -26,12 +18,13 @@
 
 
 	<div id="charts">
-		<Chart name="San Luis Water Levels" id="San Luis" type="Line" />
-		<Chart name="" id="chart2" type="Line" />
-		<Chart name="San Luis" id="chart3" type="Line" />
-		<Chart name="San Luis" id="chart4" type="Line" />
-		<Chart name="San Luis" id="chart5" type="Line" />
-		<Chart name="San Luis" id="chart6" type="Line" />
+		{#each Object.keys(stationData) as key, i}
+			{#if key == "San Luis"}
+				<Chart name="San Luis Reservoir" id={key} type="Line" />
+			{:else}
+				<Chart name={Object.values(stationData[key])[0].toString()} id={key} type="Line" />
+			{/if}
+		{/each}
 	</div>
 </main>
 

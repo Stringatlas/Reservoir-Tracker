@@ -89,6 +89,25 @@
                         src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=San%20Luis%20Reservoir+(San%20Luis%20Reservoir)&amp;t=p&amp;z=6&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
                             <a href="https://www.maps.ie/distance-area-calculator.html">measure area map</a>
                         </iframe>
+                    {:else if name == "Stevens Creek"}
+                    <div style="width: 100%"><iframe title="Stevens Creek Reservoir Map" 
+                        width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Stevens%20Creek%20Reservoir+(Stevens%20Creek%20Reservoir)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                        <a href="https://www.maps.ie/distance-area-calculator.html">area maps</a></iframe></div>
+                    {:else if name == "Lexington"}
+                        <div style="width: 100%"><iframe title="Lexington Reservoir" width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Lexington%20Reservoir+(Lexington%20Reservoir)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">area maps</a></iframe></div>
+                    {:else if name == "Oroville"}
+                        <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Lake%20Oroville+(Lake%20Oroville)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">measure acres/hectares on map</a></iframe></div>
+                    {:else if name == "Berryessa"}
+                    <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Lake%20Berryessa+(Lake%20Berryessa)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">area maps</a></iframe></div>
+                    {:else if name == "Coyote"}
+                    <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Mendocino%20Lake+(Mendocino%20Lake)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">area maps</a></iframe></div>
+                    {:else if name == "Folsom"}
+                    <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Folsom%20Lake+(Folsom%20Lake)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">measure area map</a></iframe></div>
+                    {:else if name == "Melones"}
+                    <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Lake%20Melones+(Lake%20Melones)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">distance maps</a></iframe></div>
+                    {:else if name == "Tahoe"}
+                        <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Lake%20Tahoe+(Lake%20Tahoe)&amp;t=p&amp;z=7&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">measure area map</a></iframe></div>
                     {:else}
                         <p>No map found</p>
                     {/if}

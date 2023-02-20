@@ -1,4 +1,9 @@
 {
+    "Statewide":
+    {
+        "SWV": "California Statewide Estimate"
+    },
+
     "San Luis":
     {
         "LUS": "San Luis Reservoir (State)",
@@ -39,6 +44,11 @@
     "Melones": 
     {
         "NML": "New Melones Reservoir"
+    },
+
+
+    "Tahoe": {
+        "THC": "Lake Tahoe"
     }
 
 }

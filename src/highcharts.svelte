@@ -12,14 +12,7 @@
         chart: {
             type: 'line'
         },
-        xAxis: {
-            type: 'datetime',
-            tickInterval: 24 * 3600 * 1000, // One day in milliseconds
-            labels: {
-                format: '{value:%Y-%m-%d}' // Format the date label
-            },
-            title: "Month"
-        },
+        xAxis: null,
         title: {
             text: 'Water levels (Acre Feet)'
         },

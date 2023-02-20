@@ -11,7 +11,7 @@
     import { isOpen } from "./mapsmodals.svelte";
 
     import HighChart from './highcharts.svelte';
-    
+
     let timePeriods = ["Week", "Month", "Year", "5 Years", "10 Years", "All"];
     let selectedOptionDM: 0 | 1 = 1;
 
@@ -97,8 +97,6 @@
     <div id="highchart">
 
     </div>
-
-    
 
     <button class="button-30">
         Generate chart
