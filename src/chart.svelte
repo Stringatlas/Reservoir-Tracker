@@ -174,6 +174,9 @@
     
     <div id="highchart">
         {#if isReady}
+            {#if finalData.length < 2} 
+                <p>No data found</p>
+            {/if}
             <HighChart bind:names={finalNames} bind:data={finalData}/>
         {/if}
     </div>
