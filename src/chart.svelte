@@ -83,6 +83,7 @@
     }
 
     async function generateGraph() {
+        isReady = false;
         let jsonData;
 
         if (id == "San Luis") {

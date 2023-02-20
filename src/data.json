@@ -49,6 +49,53 @@
 
     "Tahoe": {
         "THC": "Lake Tahoe"
+    },
+
+    "Shasta": {
+        "SHA": "Shasta Lake"
+    },
+
+    "Millerton": {
+        "MIL": "Millerton Lake (Friant Dam)"
+    },
+
+    "Isabella": {
+        "ISB": "Isabella Lake"
+    },
+
+    "Diamond": {
+        "DMV": "Diamond Valley Lake"
+    },
+
+    "Cachuma":
+    {
+        "CCH": "Lake Cachuma"
+    },
+
+    "Havasu":
+    {
+        "HVS": "Lake Havasu"
+    },
+
+    "Lopez":
+    {
+        "LOP": "Lopez Lake"
+    },
+
+    "Pine": {
+        "PNF": "Pine Flat Lake"
+    },
+
+    "Don Pedro": {
+        "DNP": "Don Pedro Reservoir"
+    },
+
+    "Almanor": {
+        "ALM": "Lake Almanor"
+    },
+
+    "New Bullards": {
+        "BUL": "New Bullards Bar Reservoir"
     }
 
 }

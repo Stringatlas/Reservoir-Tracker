@@ -4,20 +4,25 @@
 	import {parse, example} from "./parser";
 	import stationData from "./data.json";
 
+	let search: string;
 </script>
 
 <main>
-	<Highcharts data={example()} names={["LUS"]}/>
 	<div class="title-bar">
 		<h1>View Reservoir Levels</h1>
 	</div>
 
+	<div>
+		<p style="display:inline-block">Search: </p> <div style="display:inline-block">
+			<input type="text" bind:value={search}>
+		</div>
+	</div>
 
 	<div id="charts">
 		{#each Object.keys(stationData) as key, i}
-			{#if key == "San Luis"}
+			{#if key == "San Luis" && (search == "" || search == undefined || "San Luis Reservoir".toLowerCase().includes(search))}
 				<Chart name="San Luis Reservoir" id={key} type="Line" />
-			{:else}
+			{:else if (search == "" || search == undefined || Object.values(stationData[key])[0].toString().toLowerCase().includes(search.toLowerCase()))}
 				<Chart name={Object.values(stationData[key])[0].toString()} id={key} type="Line" />
 			{/if}
 		{/each}
@@ -34,6 +39,16 @@
 	}
 	main {
 		text-align: center;
+	}
+
+	input {
+		width: 75vw;
+		height: 5vh;
+		border: 0.3vmin;
+		border-radius: 2vmin;
+		border-style: solid;
+		border-color: rgb(194, 205, 215);
+		box-shadow: inset;
 	}
 
 	h1 {
