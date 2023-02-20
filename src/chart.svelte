@@ -87,8 +87,10 @@
             console.log(error)
             console.log("trying htmldriven cors proxy")
             
-            let url = `https://cors-proxy.htmldriven.com/?url=/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
-        
+            let urla = `https://cors-proxy.htmldriven.com/?url=/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
+            let url = `https://api.allorigins.win/get?url=/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
+
+            
             let jsonData;
             const response = await fetch(url, {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
