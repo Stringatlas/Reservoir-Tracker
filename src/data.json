@@ -1,0 +1,8 @@
+{
+    "San Luis":
+        {
+            "LUS": ["San Luis (State)", ["D", "M"]],
+            "SLF": ["San Luis (Federal)", ["D", "M"]],
+            "SNL": ["San Luis", ["D", "M"]]
+        }
+}

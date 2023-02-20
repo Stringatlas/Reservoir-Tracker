@@ -1,8 +1,7 @@
 <script lang="ts">
-    export let option1: string;
-    export let option2: string;
+    export let options;
 
-    export let selectedOption: 0 | 1;
+    export let selectedOption: number;
     
 </script>
 
@@ -22,16 +21,15 @@
     .wrapper {
         width: fit-content;
         height: fit-content;
-        margin: 1rem;
     }
 </style>
 
 <div class="wrapper">
-    <button class:selected={selectedOption === 0} on:click={() => {selectedOption = 0}}>
-        {option1}
-    </button>
-    <button class:selected={selectedOption === 1} on:click={() => {selectedOption = 1}}>
-        {option2}
-    </button>
+    {#each options as option, i}
+        <button class:selected={selectedOption === i} on:click={() => {selectedOption = i}}>
+            {option}
+        </button>
+    {/each}
+
 </div>
 
