@@ -1,17 +1,13 @@
 <script lang="ts">
 	import Chart from "./chart.svelte";
 	import Highcharts from "./highcharts.svelte";
-	import {parse, example} from "./parser"
+	import {parse, example} from "./parser";
 	import stationData from "./data.json";
-
-	let start = "2021-2-19";
-	let end = "2023-2-19";
-	let period: "M" | "D" = 'D';
 
 </script>
 
 <main>
-	<Highcharts data={example()}/>
+	<Highcharts data={example()} names={["LUS"]}/>
 	<div class="title-bar">
 		<h1>View Reservoir Levels</h1>
 	</div>

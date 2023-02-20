@@ -3,11 +3,20 @@
 
     let chart;
     export let data;
+    export let names;
 
     import { onMount } from 'svelte';
 
-    console.log(data)
+    
     onMount(() => {
+        let ser = [];
+        for (let i = 0; i < names.length; i++) {
+            ser.push({
+                name: names[i],
+                data: data[i],
+            })
+        }
+
         const options = {
         chart: {
             type: 'line'
@@ -16,12 +25,7 @@
         title: {
             text: 'Water levels (Acre Feet)'
         },
-        series: [
-            {
-                name: "Mot",
-                data: data,
-            },
-        ]
+        series: ser
     };
 
         Highcharts.chart(chart, options)

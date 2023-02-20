@@ -11,6 +11,14 @@
     import { isOpen } from "./mapsmodals.svelte";
 
     import HighChart from './highcharts.svelte';
+    import stationData from './data.json';
+    import {parse, example} from "./parser";
+    import Highcharts from "./highcharts.svelte";
+
+    let finalData;
+    let finalNames;
+
+    let isReady = false;
 
     let timePeriods = ["Week", "Month", "Year", "5 Years", "10 Years", "All"];
     let selectedOptionDM: 0 | 1 = 1;
@@ -56,7 +64,55 @@
         return "1900-1-1"
     } 
 
-    console.log(getCurrentDate(), getDateWeek(), getDateMonth(), getDateYear(), getDate5Years(), getDate10Years(), getDateAll());
+    let ordering = [getDateWeek, getDateMonth, getDateYear, getDate5Years, getDate10Years, getDateAll];
+
+    async function fetchData(stationID: string) {
+        let end = getCurrentDate();
+        let start = ordering[selectedOptionTimePeriod]();
+        let selectedDM = selectedOptionDM == 0 ? "D" : "M";
+        
+        let url = `https://cors-anywhere.herokuapp.com/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
+        let jsonData;
+        const response = await fetch(url, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+        });
+
+        jsonData = await response.json();
+        return jsonData
+    }
+
+    async function generateGraph() {
+        let jsonData;
+
+        if (id == "San Luis") {
+            const sanLuisLocations = Object.keys(stationData[id]);
+            const sanLuisNames = Object.values(stationData[id]);
+            const data = []
+
+            for (let location of sanLuisLocations) {
+                data.push(parse(await fetchData(location)));
+            }
+            jsonData = data;
+
+            finalNames = sanLuisNames;
+        }   
+        else {
+            let stationID = Object.keys(stationData[id])[0];
+            const stationName = Object.values(stationData[id]);
+            jsonData = await fetchData(stationID);
+            jsonData = [parse(jsonData)];
+
+            finalNames = stationName;
+
+        }
+        console.log(jsonData);
+        finalData = jsonData;
+
+        isReady = true;
+        
+    }
+
 
 </script>
 
@@ -95,10 +151,12 @@
     </div>
     
     <div id="highchart">
-
+        {#if isReady}
+            <HighChart bind:names={finalNames} bind:data={finalData}/>
+        {/if}
     </div>
 
-    <button class="button-30">
+    <button class="button-30" on:click={generateGraph}>
         Generate chart
     </button>
 
@@ -123,7 +181,7 @@
         border-width: 5px;
         border-style: solid;
         width: 90vw;
-        height: 500px;
+        height: fit-content;
         margin-bottom: 3vh;
 
         position: relative;
@@ -140,7 +198,8 @@
 
 
     #highchart {
-
+        width: 98%;
+        margin: auto;
     }
 
     .button-30 {
