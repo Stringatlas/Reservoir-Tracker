@@ -71,33 +71,35 @@
         let start = ordering[selectedOptionTimePeriod]();
         let selectedDM = selectedOptionDM == 0 ? "D" : "M";
         
+        let url = `https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
+
         try {
             let url = `https://cors-anywhere.herokuapp.com/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
-        
+            
+
             let jsonData;
             const response = await fetch(url, {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
-            });
+            }); 
 
             jsonData = await response.json();
+            console.log(jsonData)
             return jsonData
 
         } catch (error) {
             console.log(error)
-            console.log("trying htmldriven cors proxy")
-            
-            let urla = `https://cors-proxy.htmldriven.com/?url=/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
-            let url = `https://api.allorigins.win/get?url=/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
-
+            console.log("trying alternative cors proxy")
             
             let jsonData;
-            const response = await fetch(url, {
+            const response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(url), {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
-            });
+            }); 
 
             jsonData = await response.json();
+            jsonData = JSON.parse(jsonData.contents)
+            console.log(jsonData)
             return jsonData
         }
         
@@ -174,7 +176,7 @@
     
     <div id="highchart">
         {#if isReady}
-            {#if finalData.length < 2} 
+            {#if finalData[0].length < 2} 
                 <p>No data found</p>
             {/if}
             <HighChart bind:names={finalNames} bind:data={finalData}/>
