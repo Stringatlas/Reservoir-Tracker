@@ -51,11 +51,6 @@
         pointer-events: auto;
     }
 
-    h2 {
-        text-align: center;
-        font-size: 24px;
-    }
-
     p {
         text-align: center;
         margin-top: 16px;

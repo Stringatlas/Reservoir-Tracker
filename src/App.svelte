@@ -3,14 +3,52 @@
 	import Highcharts from "./highcharts.svelte";
 	import {parse, example} from "./parser";
 	import stationData from "./data.json";
+    import { onMount } from "svelte";
 
 	let search: string;
+
+	let corsWorking = false;
+
+	onMount(() => {
+		testCORSProxy();
+	});
+
+
+	async function testCORSProxy() {
+		let url = "https://cors-anywhere.herokuapp.com/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=LUS&SensorNums=15&dur_code=D&Start=2023-01-31&End=2023-02-22"
+		
+		try {
+			const response = await fetch(url, {
+				method: 'GET',
+				mode: 'cors', 
+			}); 
+
+			corsWorking = true;
+		} 
+		catch (error) {
+			console.log(error);
+			corsWorking = false;
+		}
+	}
 </script>
 
 <main>
+
+
 	<div class="title-bar">
 		<h1>View Reservoir Levels</h1>
 	</div>
+
+	
+	{#if !corsWorking} 
+		<div>
+			<p>For a better experience please click the button to allow CORS</p>
+			<iframe title="cors access" src="https://cors-anywhere.herokuapp.com/" frameborder="0"></iframe>
+
+		</div>
+
+	{/if}	
+	
 
 	<div>
 		<p style="display:inline-block">Search: </p> <div style="display:inline-block">
@@ -61,6 +99,10 @@
 
 	.title-bar {
 		background-color: rgb(108, 149, 179);
+	}
+	iframe {
+		width: 80vw;
+		height: auto;
 	}
 	
 

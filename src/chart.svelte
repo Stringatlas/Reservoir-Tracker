@@ -18,6 +18,9 @@
     let finalData;
     let finalNames;
 
+    let button;
+    let buttonDisabled = false;
+
     let isReady = false;
 
     let timePeriods = ["Week", "Month", "Year", "5 Years", "10 Years", "All"];
@@ -76,7 +79,7 @@
         try {
             let url = `https://cors-anywhere.herokuapp.com/https://cdec.water.ca.gov/dynamicapp/req/JSONDataServlet?Stations=${stationID}&SensorNums=15&dur_code=${selectedDM}&Start=${start}&End=${end}`;
             
-
+            
             let jsonData;
             const response = await fetch(url, {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -106,6 +109,7 @@
     }
 
     async function generateGraph() {
+        buttonDisabled = true;
         isReady = false;
         let jsonData;
 
@@ -134,7 +138,7 @@
         finalData = jsonData;
 
         isReady = true;
-        
+        buttonDisabled = false;
     }
 
 
@@ -183,7 +187,7 @@
         {/if}
     </div>
 
-    <button class="button-30" on:click={generateGraph}>
+    <button class="button-30" on:click={generateGraph} bind:this={button} disabled={buttonDisabled}>
         Generate chart
     </button>
 
@@ -195,6 +199,7 @@
         display: inline-block;
     }
 
+    
     #top-left {
         position: absolute;
         
