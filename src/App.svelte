@@ -21,12 +21,16 @@
 			const response = await fetch(url, {
 				method: 'GET',
 				mode: 'cors', 
-			}); 
+			});
+			
+			if (!response.ok) { 
+      			throw Error(response.statusText);
+			}
 
 			corsWorking = true;
-		} 
-		catch (error) {
+		} catch (error) {
 			console.log(error);
+			console.log("cors not working")
 			corsWorking = false;
 		}
 	}
@@ -42,9 +46,8 @@
 	
 	{#if !corsWorking} 
 		<div>
-			<p>For a better experience please click the button to allow CORS</p>
+			<p>For a better experience, please click the button to allow CORS</p>
 			<iframe title="cors access" src="https://cors-anywhere.herokuapp.com/" frameborder="0"></iframe>
-
 		</div>
 
 	{/if}	

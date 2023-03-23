@@ -21,7 +21,12 @@
         chart: {
             type: 'line'
         },
-        xAxis: null,
+        xAxis: {
+            type: "datetime",
+            dateTimeLabelFormats: {
+                second: '%d %b %Y',
+            }
+        },
         title: {
             text: 'Water levels (Acre Feet)'
         },
