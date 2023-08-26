@@ -5,14 +5,15 @@
     export let id: string;
     export let type: "Line" | "Scatter" | "Bar";
 
+    type;
     import RadioSelect from "./radioselect.svelte";
 
     import MapsModal from "./mapsmodals.svelte";
     import { isOpen } from "./mapsmodals.svelte";
 
     import HighChart from "./highcharts.svelte";
-    import stationData from "./data.json";
-    import { parse, example } from "./parser";
+    import stationData from "./output.json";
+    import { parse } from "./parser";
     import Highcharts from "./highcharts.svelte";
 
     let finalData;
@@ -133,8 +134,10 @@
         let jsonData;
 
         if (id == "San Luis") {
-            const sanLuisLocations = Object.keys(stationData[id]);
-            const sanLuisNames = Object.values(stationData[id]);
+            const sanLuisLocations = Object.keys(stationData[id].Locations);
+            console.log("locatios", sanLuisLocations);
+            const sanLuisNames = Object.values(stationData[id].Locations);
+            console.log("locatios", sanLuisNames);
             const data = [];
 
             for (let location of sanLuisLocations) {
@@ -144,8 +147,9 @@
 
             finalNames = sanLuisNames;
         } else {
-            let stationID = Object.keys(stationData[id])[0];
-            const stationName = Object.values(stationData[id]);
+            let stationID = stationData[id].Symbol;
+            const stationName = [stationData[id].Name];
+
             jsonData = await fetchData(stationID);
             jsonData = [parse(jsonData)];
 

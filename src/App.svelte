@@ -1,8 +1,8 @@
 <script lang="ts">
     import Chart from "./chart.svelte";
     import Highcharts from "./highcharts.svelte";
-    import { parse, example } from "./parser";
-    import stationData from "./data.json";
+    import { parse } from "./parser";
+    import stationData from "./output.json";
     import { onMount } from "svelte";
 
     let search: string;
@@ -67,12 +67,11 @@
                         .toLowerCase()
                         .includes(search))}
                 <Chart name="San Luis Reservoir" id={key} type="Line" />
-            {:else if search == "" || search == undefined || Object.values(stationData[key])[0]
-                    .toString()
+            {:else if search == "" || search == undefined || stationData[key].Name.toString()
                     .toLowerCase()
                     .includes(search.toLowerCase())}
                 <Chart
-                    name={Object.values(stationData[key])[0].toString()}
+                    name={stationData[key].Name.toString()}
                     id={key}
                     type="Line"
                 />
